@@ -1,0 +1,40 @@
+[
+  {
+    "id": "blazor-erp",
+    "title": "Custom ERP System with Blazor Server",
+    "description": "An in-house ERP system built with Blazor Server to replace MyFactory",
+    "details": "A comprehensive ERP system developed with Blazor Server, featuring Active Directory integration and seamless compatibility with the existing MyFactory system.",
+    "type": "Professional",
+    "category": "Web Application",
+    "year": "2022",
+    "technologies": [
+      "CSS",
+      "HTML",
+      "Blazor",
+      "SSR",
+      "Figma",
+      "JavaScript",
+      "REST API"
+    ]
+  },
+  {
+    "id": "flutter-game-of-life",
+    "title": "Flutter Game of Life",
+    "description": "Conway's Game of Life implemented in Flutter",
+    "details": "An interactive implementation of Conway's Game of Life using Flutter, featuring a responsive UI and adjustable simulation speed.",
+    "type": "Private",
+    "category": "Mobile Application",
+    "year": "2022",
+    "technologies": ["Flutter", "Cross Platform", "Dart"]
+  },
+  {
+    "id": "holodraw",
+    "title": "HoloDraw - Bachelor's Thesis",
+    "description": "VR drawing system combining 2D and 3D input methods",
+    "details": "A VR drawing system that bridges the gap between free-form VR drawing and precise 2D input, developed as a Bachelor's thesis project.",
+    "type": "Private",
+    "category": "Virtual Reality",
+    "year": "2021",
+    "technologies": ["Unity", "VR", "Motion Capture", "C#", "3D", "OptiTrack"]
+  }
+]
