@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-900">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +13,7 @@
       defer
     ></script>
   </head>
-  <body class="bg-gray-100 text-gray-900">
+  <body class="bg-gray-900 text-gray-100">
     <div
       x-data="{
         project: null,
@@ -28,53 +28,67 @@
         }
     }"
       x-init="loadProject()"
-      class="container mx-auto mt-4 p-4"
+      class="container mx-auto px-4 py-12 max-w-7xl"
     >
-      <a href="index.html#projects" class="text-blue-500 mb-4 block"
-        >&larr; Back to Projects</a
+      <a
+        href="index.html#projects"
+        class="text-blue-400 hover:text-blue-300 mb-8 inline-flex items-center gap-2 group"
       >
+        <span class="transform transition-transform group-hover:-translate-x-1"
+          >&larr;</span
+        >
+        <span>Back to Projects</span>
+      </a>
 
       <template x-if="project">
-        <div class="p-4 bg-white shadow rounded">
-          <h1 class="text-3xl font-bold mb-4" x-text="project.title"></h1>
+        <div class="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+          <h1
+            class="text-4xl font-bold mb-4 text-white"
+            x-text="project.title"
+          ></h1>
           <p
-            class="text-gray-600 mb-4"
+            class="text-gray-400 mb-8 text-lg"
             x-text="`${project.type} • ${project.category} • ${project.year}`"
           ></p>
 
           <!-- Image Gallery -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
           >
             <template x-for="image in project.images" :key="image">
-              <div>
+              <div
+                class="rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-[1.02]"
+              >
                 <img
                   :src="'public/' + image"
-                  class="w-full h-auto rounded"
+                  class="w-full h-64 object-cover"
                   :alt="project.title"
                 />
               </div>
             </template>
           </div>
 
-          <p class="text-lg mb-4" x-text="project.details"></p>
+          <p
+            class="text-gray-300 text-lg mb-8 leading-relaxed"
+            x-text="project.details"
+          ></p>
 
           <!-- Technologies -->
-          <div class="flex flex-wrap gap-2 mb-4">
+          <div class="flex flex-wrap gap-2 mb-8">
             <template x-for="tech in project.technologies" :key="tech">
               <span
-                class="bg-blue-100 text-blue-800 px-2 py-1 rounded"
+                class="bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full text-sm"
                 x-text="tech"
               ></span>
             </template>
           </div>
 
           <!-- Links -->
-          <div class="mb-4" x-show="project.links">
+          <div class="mb-8" x-show="project.links">
             <template x-for="link in project.links" :key="link.url">
               <a
                 :href="link.url"
-                class="text-blue-500 underline mr-2"
+                class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mr-4 transition-colors"
                 target="_blank"
               >
                 <i :class="link.icon"></i>
@@ -83,33 +97,49 @@
             </template>
           </div>
 
-          <!-- Objective Details -->
-          <div class="mb-4">
-            <h2 class="text-2xl font-semibold">Objective Details</h2>
-            <ul class="list-disc list-inside">
-              <template
-                x-for="objective in project.objectiveDetails"
-                :key="objective"
-              >
-                <li x-text="objective"></li>
-              </template>
-            </ul>
-          </div>
+          <!-- Objective & Project Details -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-gray-800/50 rounded-xl p-6">
+              <h2 class="text-2xl font-semibold mb-4 text-white">
+                Objective Details
+              </h2>
+              <ul class="space-y-2 text-gray-300">
+                <template
+                  x-for="objective in project.objectiveDetails"
+                  :key="objective"
+                >
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-400">•</span>
+                    <span x-text="objective"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
 
-          <!-- Project Details -->
-          <div class="mb-4">
-            <h2 class="text-2xl font-semibold">Project Details</h2>
-            <ul class="list-disc list-inside">
-              <template x-for="detail in project.projectDetails" :key="detail">
-                <li x-text="detail"></li>
-              </template>
-            </ul>
+            <div class="bg-gray-800/50 rounded-xl p-6">
+              <h2 class="text-2xl font-semibold mb-4 text-white">
+                Project Details
+              </h2>
+              <ul class="space-y-2 text-gray-300">
+                <template
+                  x-for="detail in project.projectDetails"
+                  :key="detail"
+                >
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-400">•</span>
+                    <span x-text="detail"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
           </div>
         </div>
       </template>
 
       <template x-if="!project">
-        <div class="bg-red-100 text-red-800 p-4 rounded">Project not found</div>
+        <div class="bg-red-900/50 text-red-300 p-6 rounded-xl">
+          Project not found
+        </div>
       </template>
     </div>
   </body>
