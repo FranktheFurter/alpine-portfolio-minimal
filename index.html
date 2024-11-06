@@ -108,23 +108,23 @@
               <div
                 class="bg-gray-800/50 rounded-2xl flex-1"
                 x-data="{
-    timeline: [],
-    loadTimeline() {
-      fetch('data/timeline.json')
-        .then(response => response.json())
-        .then(data => {
-          this.timeline = data;
-          this.$nextTick(() => {
-            if (window.location.hash) {
-              const element = document.querySelector(window.location.hash);
-              if (element) {
-                element.scrollIntoView();
-              }
-            }
-          });
-        });
-    }
-  }"
+                timeline: [],
+                loadTimeline() {
+                  fetch('data/timeline.json')
+                    .then(response => response.json())
+                    .then(data => {
+                      this.timeline = data;
+                      this.$nextTick(() => {
+                        if (window.location.hash) {
+                          const element = document.querySelector(window.location.hash);
+                          if (element) {
+                            element.scrollIntoView();
+                          }
+                        }
+                      });
+                    });
+                }
+              }"
                 x-init="loadTimeline()"
               >
                 <template x-for="(item, index) in timeline" :key="index">
