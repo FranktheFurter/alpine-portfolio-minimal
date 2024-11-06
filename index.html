@@ -3,68 +3,123 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meine minimalistische Portfolio-Webseite</title>
+    <title>Portfolio</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <!-- Alpine.js einbinden -->
     <script
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
       defer
     ></script>
   </head>
   <body class="bg-gray-100 text-gray-900">
-    <nav class="p-4 bg-blue-600 text-white flex justify-between items-center">
-      <div class="text-lg font-semibold">Meine Webseite</div>
-      <div class="space-x-4">
-        <a href="#home" class="hover:underline">Startseite</a>
-        <a href="#about" class="hover:underline">Über mich</a>
-        <a href="#projects" class="hover:underline">Projekte</a>
+    <div
+      x-data="{
+      projects: [],
+      selectedProject: null,
+      loadProjects() {
+        fetch('data/projects.json')
+          .then(response => response.json())
+          .then(data => this.projects = data);
+      }
+    }"
+      x-init="loadProjects()"
+      class="container mx-auto p-4"
+    >
+      <div class="space-y-8">
+        <!-- Home -->
+        <section id="home" class="p-4 bg-white shadow rounded">
+          <h1 class="text-3xl font-bold mb-4">Welcome!</h1>
+          <p class="text-lg">
+            Here you can find information about me and my projects.
+          </p>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="p-4 bg-white shadow rounded">
+          <h1 class="text-3xl font-bold mb-4">About Me</h1>
+          <p class="text-lg">Here you can learn more about me.</p>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="p-4 bg-white shadow rounded">
+          <h1 class="text-3xl font-bold mb-4">My Projects</h1>
+          <div class="space-y-4">
+            <template x-for="project in projects" :key="project.id">
+              <div class="bg-gray-50 shadow rounded overflow-hidden">
+                <div
+                  class="p-4 cursor-pointer hover:bg-gray-100 transition"
+                  @click="selectedProject = selectedProject === project ? null : project"
+                  :class="{'bg-gray-100': selectedProject === project}"
+                >
+                  <div class="flex justify-between items-center">
+                    <h2
+                      class="text-xl font-semibold"
+                      x-text="project.title"
+                    ></h2>
+                    <svg
+                      class="w-5 h-5 transform transition-transform"
+                      :class="{'rotate-180': selectedProject === project}"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                  <p
+                    class="text-gray-600 mt-2"
+                    x-text="project.description"
+                  ></p>
+                  <div class="flex gap-2 flex-wrap mt-2">
+                    <span
+                      class="text-sm text-blue-600"
+                      x-text="project.type"
+                    ></span>
+                    <span
+                      class="text-sm text-gray-500"
+                      x-text="project.year"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- Expandable Content -->
+                <div
+                  x-show="selectedProject === project"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 transform -translate-y-4"
+                  x-transition:enter-end="opacity-100 transform translate-y-0"
+                  x-transition:leave="transition ease-in duration-200"
+                  x-transition:leave-start="opacity-100 transform translate-y-0"
+                  x-transition:leave-end="opacity-0 transform -translate-y-4"
+                  class="border-t border-gray-200 p-4 bg-white"
+                >
+                  <p
+                    class="text-gray-600 mb-4"
+                    x-text="`${project.type} • ${project.category} • ${project.year}`"
+                  ></p>
+                  <p class="text-lg mb-4" x-text="project.details"></p>
+                  <div class="flex flex-wrap gap-2">
+                    <template x-for="tech in project.technologies" :key="tech">
+                      <span
+                        class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                        x-text="tech"
+                      >
+                      </span>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </section>
       </div>
-    </nav>
-
-    <div id="home" class="container mx-auto p-4">
-      <section>
-        <h1 class="text-3xl font-bold mb-4">Willkommen auf der Startseite!</h1>
-        <p>Hier findest du Informationen zu mir und meinen Projekten.</p>
-      </section>
-
-      <section id="about">
-        <h2 class="text-3xl font-bold mb-4">Über mich</h2>
-        <p>Hier kannst du mehr über mich erfahren.</p>
-      </section>
-
-      <section
-        id="projects"
-        x-data="{
-        projects: [],
-        loadProjects() {
-          fetch('data/projects.json')
-            .then(response => response.json())
-            .then(data => this.projects = data);
-        }
-      }"
-        x-init="loadProjects()"
-      >
-        <h2 class="text-3xl font-bold mb-4">Meine Projekte</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <template x-for="project in projects" :key="project.id">
-            <div class="p-4 bg-gray-50 shadow rounded">
-              <h3
-                class="text-xl font-semibold mb-2"
-                x-text="project.title"
-              ></h3>
-              <p class="text-gray-600" x-text="project.description"></p>
-              <a
-                :href="'project.html?id=' + project.id"
-                class="text-blue-600 hover:underline"
-                >Mehr erfahren</a
-              >
-            </div>
-          </template>
-        </div>
-      </section>
     </div>
   </body>
 </html>
