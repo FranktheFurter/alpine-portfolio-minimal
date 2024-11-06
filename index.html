@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alpine.js Routing Example</title>
+    <title>Marc Frankfurter Portfolio</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -27,7 +27,6 @@
     }"
       x-init="loadProjects()"
     >
-      <!-- Main Content (visible when not showing project details) -->
       <div>
         <!-- Home -->
         <section
@@ -36,7 +35,7 @@
         >
           <div class="text-center">
             <h1
-              class="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text"
+              class="text-5xl font-bold mb-6 bg-gradient-to-r from-red-500 to-purple-500 text-transparent bg-clip-text"
             >
               Welcome to my Portfolio!
             </h1>
@@ -54,10 +53,44 @@
           <!-- About -->
           <section id="about" class="mb-24">
             <h1 class="text-4xl font-bold mb-6 text-white">About</h1>
-            <div class="bg-gray-800/50 p-8 rounded-2xl shadow-xl">
-              <p class="text-xl text-gray-300">
-                Here you can learn more about me.
-              </p>
+            <div class="flex flex-col md:flex-row gap-8">
+              <div class="bg-gray-800/50 mt-8 rounded-2xl flex-1">
+                <p class="text-gray-300 p-6">
+                  Hello, I'm Marc Frankfurter, a passionate front-end developer
+                  and designer who's been captivated by technology since
+                  childhood.<br /><br />
+                  I graduated in computer engineering from Ulm, specializing in
+                  usability engineering and UI development.<br /><br />
+                  Initially working as a UX designer, I eventually shifted
+                  towards a more technical role due to my love for development.
+                  I thrive on the intricate process of combining individual
+                  elements in both programming and designing.
+                </p>
+              </div>
+              <div class="bg-gray-800/50 mt-8 rounded-2xl flex-1">
+                <p class="text-gray-300 p-6">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Nulla a nostrum dicta qui in voluptas dolores unde! Veniam,
+                  fuga, error, qui nobis laboriosam nisi suscipit velit saepe
+                  ipsum quasi ullam? Exercitationem itaque asperiores cumque
+                  reiciendis? Reprehenderit quos deleniti tempore? Odit, earum
+                  velit maiores quis ea voluptas tempora eligendi ut culpa
+                  dignissimos, facilis animi assumenda nam reiciendis commodi
+                  reprehenderit natus blanditiis. Error reiciendis
+                  reprehenderit, corrupti voluptas eveniet qui animi sunt
+                  deserunt magni ratione quae ipsa provident inventore vel neque
+                  sed numquam quisquam eum repudiandae velit aperiam vitae earum
+                  voluptates. Temporibus, sapiente? Labore alias quidem sint
+                  veritatis beatae itaque deleniti provident. Possimus maiores
+                  voluptates et, laudantium minima quae molestias consectetur,
+                  deleniti ab numquam dicta eum molestiae error perspiciatis
+                  distinctio nulla ullam nostrum. Incidunt soluta dolores
+                  quaerat. Debitis provident recusandae magni eius! Odit cum
+                  debitis repellendus quam, doloremque ab quos iusto, tempore
+                  voluptatum consequuntur labore. Dolorum, fuga. Possimus
+                  impedit molestiae tempora doloribus quaerat.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -125,7 +158,7 @@
           <!-- Contact -->
           <section id="contact" class="mb-24">
             <h1 class="text-4xl font-bold mb-6 text-white">Contact</h1>
-            <div class="bg-gray-800/50 p-8 rounded-2xl shadow-xl">
+            <div class="bg-gray-800/50 p-8 rounded-2xl">
               <p class="text-xl text-gray-300">Do you have work for me?.</p>
             </div>
           </section>
