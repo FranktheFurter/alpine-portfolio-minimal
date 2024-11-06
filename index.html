@@ -22,7 +22,17 @@
       loadProjects() {
         fetch('data/projects.json')
           .then(response => response.json())
-          .then(data => this.projects = data);
+          .then(data => {
+            this.projects = data;
+            this.$nextTick(() => {
+              if (window.location.hash) {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                  element.scrollIntoView();
+                }
+              }
+            });
+          });
       },
     }"
       x-init="loadProjects()"
@@ -31,7 +41,7 @@
         <!-- Home -->
         <section
           id="home"
-          class="min-h-screen flex items-center justify-center"
+          class="min-h-screen flex items-center justify-center nav-bar-scroll-margin"
         >
           <div class="text-center">
             <h1
@@ -51,7 +61,7 @@
         <!-- Container for remaining sections -->
         <div class="container mx-auto px-4 py-12 max-w-7xl">
           <!-- About -->
-          <section id="about" class="mb-24">
+          <section id="about" class="mb-24 nav-bar-scroll-margin">
             <h1 class="text-4xl font-bold mb-6 text-white">About</h1>
             <div class="flex flex-col md:flex-row gap-8">
               <div class="bg-gray-800/50 rounded-2xl flex-1 relative">
@@ -98,13 +108,23 @@
               <div
                 class="bg-gray-800/50 rounded-2xl flex-1"
                 x-data="{
-                      timeline: [],
-                      loadTimeline() {
-                          fetch('data/timeline.json')
-                              .then(response => response.json())
-                              .then(data => this.timeline = data);
-                      }
-                   }"
+    timeline: [],
+    loadTimeline() {
+      fetch('data/timeline.json')
+        .then(response => response.json())
+        .then(data => {
+          this.timeline = data;
+          this.$nextTick(() => {
+            if (window.location.hash) {
+              const element = document.querySelector(window.location.hash);
+              if (element) {
+                element.scrollIntoView();
+              }
+            }
+          });
+        });
+    }
+  }"
                 x-init="loadTimeline()"
               >
                 <template x-for="(item, index) in timeline" :key="index">
@@ -131,7 +151,7 @@
           </section>
 
           <!-- Projects -->
-          <section id="projects">
+          <section id="projects" class="nav-bar-scroll-margin">
             <h1 class="text-4xl font-bold mb-12 text-white">My Projects</h1>
             <template
               x-for="year in [...new Set(projects.map(p => p.year))].sort().reverse()"
@@ -192,7 +212,7 @@
           </section>
 
           <!-- Contact -->
-          <section id="contact" class="mb-24">
+          <section id="contact" class="mb-24 nav-bar-scroll-margin">
             <h1 class="text-4xl font-bold mb-6 text-white">Contact</h1>
             <div class="bg-gray-800/50 p-8 rounded-2xl">
               <p class="text-xl text-gray-300">Do you have work for me?.</p>
@@ -204,3 +224,9 @@
     <my-footer></my-footer>
   </body>
 </html>
+
+<style>
+  .nav-bar-scroll-margin {
+    scroll-margin-top: 5rem;
+  }
+</style>
