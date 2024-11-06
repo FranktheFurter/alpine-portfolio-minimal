@@ -3,123 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+    <title>Alpine.js Projects Accordion</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <script
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
       defer
     ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
   </head>
-  <body class="bg-gray-100 text-gray-900">
+  <body class="bg-light text-dark">
     <div
       x-data="{
-      projects: [],
-      selectedProject: null,
-      loadProjects() {
-        fetch('data/projects.json')
-          .then(response => response.json())
-          .then(data => this.projects = data);
-      }
-    }"
+            projects: [],
+            loadProjects() {
+                fetch('data/projects.json')
+                    .then(response => response.json())
+                    .then(data => this.projects = data);
+            }
+        }"
       x-init="loadProjects()"
-      class="container mx-auto p-4"
+      class="container mt-4"
     >
-      <div class="space-y-8">
-        <!-- Home -->
-        <section id="home" class="p-4 bg-white shadow rounded">
-          <h1 class="text-3xl font-bold mb-4">Welcome!</h1>
-          <p class="text-lg">
-            Here you can find information about me and my projects.
-          </p>
-        </section>
+      <!-- Startseite -->
+      <section id="home" class="p-4 bg-white shadow-sm rounded mb-4">
+        <h1 class="display-4 mb-4">Willkommen auf der Startseite!</h1>
+        <p class="lead">
+          Hier findest du Informationen zu mir und meinen Projekten.
+        </p>
+      </section>
 
-        <!-- About -->
-        <section id="about" class="p-4 bg-white shadow rounded">
-          <h1 class="text-3xl font-bold mb-4">About Me</h1>
-          <p class="text-lg">Here you can learn more about me.</p>
-        </section>
+      <!-- Über mich -->
+      <section id="about" class="p-4 bg-white shadow-sm rounded mb-4">
+        <h1 class="display-4 mb-4">Über mich</h1>
+        <p class="lead">Hier kannst du mehr über mich erfahren.</p>
+      </section>
 
-        <!-- Projects -->
-        <section id="projects" class="p-4 bg-white shadow rounded">
-          <h1 class="text-3xl font-bold mb-4">My Projects</h1>
-          <div class="space-y-4">
-            <template x-for="project in projects" :key="project.id">
-              <div class="bg-gray-50 shadow rounded overflow-hidden">
-                <div
-                  class="p-4 cursor-pointer hover:bg-gray-100 transition"
-                  @click="selectedProject = selectedProject === project ? null : project"
-                  :class="{'bg-gray-100': selectedProject === project}"
+      <!-- Projects Section with Accordion -->
+      <section id="projects" class="p-4 bg-white shadow-sm rounded mb-4">
+        <h1 class="display-4 mb-4">Meine Projekte</h1>
+        <div class="accordion" id="projectsAccordion">
+          <template x-for="project in projects" :key="project.id">
+            <div class="accordion-item">
+              <h2 class="accordion-header" :id="'heading' + project.id">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  :data-bs-target="'#collapse' + project.id"
+                  aria-expanded="false"
+                  :aria-controls="'collapse' + project.id"
                 >
-                  <div class="flex justify-between items-center">
-                    <h2
-                      class="text-xl font-semibold"
-                      x-text="project.title"
-                    ></h2>
-                    <svg
-                      class="w-5 h-5 transform transition-transform"
-                      :class="{'rotate-180': selectedProject === project}"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
-                  <p
-                    class="text-gray-600 mt-2"
-                    x-text="project.description"
-                  ></p>
-                  <div class="flex gap-2 flex-wrap mt-2">
-                    <span
-                      class="text-sm text-blue-600"
-                      x-text="project.type"
-                    ></span>
-                    <span
-                      class="text-sm text-gray-500"
-                      x-text="project.year"
-                    ></span>
-                  </div>
-                </div>
-
-                <!-- Expandable Content -->
-                <div
-                  x-show="selectedProject === project"
-                  x-transition:enter="transition ease-out duration-200"
-                  x-transition:enter-start="opacity-0 transform -translate-y-4"
-                  x-transition:enter-end="opacity-100 transform translate-y-0"
-                  x-transition:leave="transition ease-in duration-200"
-                  x-transition:leave-start="opacity-100 transform translate-y-0"
-                  x-transition:leave-end="opacity-0 transform -translate-y-4"
-                  class="border-t border-gray-200 p-4 bg-white"
-                >
-                  <p
-                    class="text-gray-600 mb-4"
-                    x-text="`${project.type} • ${project.category} • ${project.year}`"
-                  ></p>
-                  <p class="text-lg mb-4" x-text="project.details"></p>
-                  <div class="flex flex-wrap gap-2">
+                  <span x-text="project.title"></span>
+                  <span
+                    class="badge bg-primary ms-2"
+                    x-text="project.type"
+                  ></span>
+                  <span
+                    class="badge bg-secondary ms-2"
+                    x-text="project.year"
+                  ></span>
+                </button>
+              </h2>
+              <div
+                :id="'collapse' + project.id"
+                class="accordion-collapse collapse"
+                :aria-labelledby="'heading' + project.id"
+                data-bs-parent="#projectsAccordion"
+              >
+                <div class="accordion-body">
+                  <p class="lead" x-text="project.details"></p>
+                  <div class="d-flex flex-wrap gap-2">
                     <template x-for="tech in project.technologies" :key="tech">
                       <span
-                        class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                        class="badge bg-info text-dark"
                         x-text="tech"
-                      >
-                      </span>
+                      ></span>
                     </template>
                   </div>
                 </div>
               </div>
-            </template>
-          </div>
-        </section>
-      </div>
+            </div>
+          </template>
+        </div>
+      </section>
     </div>
   </body>
 </html>
