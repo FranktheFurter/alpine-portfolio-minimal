@@ -12,6 +12,7 @@
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
       defer
     ></script>
+    <script src="components/my-nav.js" defer></script>
   </head>
   <body class="bg-gray-900 text-gray-100">
     <div
@@ -45,27 +46,7 @@
         </section>
 
         <!-- Sticky Navigation -->
-        <nav class="sticky top-0 bg-gray-900 shadow-lg z-50">
-          <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-center space-x-8">
-              <a
-                href="#home"
-                class="text-gray-300 hover:text-white transition-colors"
-                >Home</a
-              >
-              <a
-                href="#about"
-                class="text-gray-300 hover:text-white transition-colors"
-                >About</a
-              >
-              <a
-                href="#projects"
-                class="text-gray-300 hover:text-white transition-colors"
-                >Projects</a
-              >
-            </div>
-          </div>
-        </nav>
+        <my-nav></my-nav>
 
         <!-- Container for remaining sections -->
         <div class="container mx-auto px-4 py-12 max-w-7xl">
