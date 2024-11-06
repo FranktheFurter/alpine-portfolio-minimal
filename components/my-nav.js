@@ -11,6 +11,7 @@ class MyNav extends HTMLElement {
             </a>
             <a href="index.html#about" class="text-gray-300 hover:text-white transition-colors">About</a>
             <a href="index.html#projects" class="text-gray-300 hover:text-white transition-colors">Projects</a>
+            <a href="index.html#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
           </div>
         </div>
       </nav>
