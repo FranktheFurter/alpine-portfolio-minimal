@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Salenet AG",
+    "role": "Fullstack Developer",
+    "date": "August 2023 - Now",
+    "description": "Developing Flutter WMS apps and Shopware online-shop"
+  },
+  {
+    "company": "Scheppach GmbH",
+    "role": "Frontend Developer",
+    "date": "February 2022 - August 2023",
+    "description": "Leveraged Flutter, Blazor, and Vue.js to create applications such as a Technician Portal, a Warehouse Management System, perform an ERP system migration, and develop the frontend of a webshop."
+  },
+  {
+    "company": "Elektrobit Automotive GmbH",
+    "role": "UX Designer",
+    "date": "August 2021 - February 2022",
+    "description": "Conceptualized and developed user-friendly interfaces in the automotive sector, worked on a hybrid system (MIB/Android) and integrated Amazon Alexa. My tools of choice were design systems like Figma and Sketch, and I supported developers through Git/Jira."
+  },
+  {
+    "company": "University of Ulm",
+    "role": "Bachelor Media Informatics",
+    "date": "August 2021 - February 2022",
+    "description": "Completed his Bachelor's degree in Media Informatics at the University of Ulm from 2015 to 2021, with a focus on Interactive Systems, Usability Engineering, Web Engineering, and User Interface Software Technology."
+  }
+]

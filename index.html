@@ -54,8 +54,8 @@
           <section id="about" class="mb-24">
             <h1 class="text-4xl font-bold mb-6 text-white">About</h1>
             <div class="flex flex-col md:flex-row gap-8">
-              <div class="bg-gray-800/50 mt-8 rounded-2xl flex-1">
-                <p class="text-gray-300 p-6">
+              <div class="bg-gray-800/50 rounded-2xl flex-1">
+                <p class="text-gray-300">
                   Hello, I'm Marc Frankfurter, a passionate front-end developer
                   and designer who's been captivated by technology since
                   childhood.<br /><br />
@@ -67,29 +67,37 @@
                   elements in both programming and designing.
                 </p>
               </div>
-              <div class="bg-gray-800/50 mt-8 rounded-2xl flex-1">
-                <p class="text-gray-300 p-6">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Nulla a nostrum dicta qui in voluptas dolores unde! Veniam,
-                  fuga, error, qui nobis laboriosam nisi suscipit velit saepe
-                  ipsum quasi ullam? Exercitationem itaque asperiores cumque
-                  reiciendis? Reprehenderit quos deleniti tempore? Odit, earum
-                  velit maiores quis ea voluptas tempora eligendi ut culpa
-                  dignissimos, facilis animi assumenda nam reiciendis commodi
-                  reprehenderit natus blanditiis. Error reiciendis
-                  reprehenderit, corrupti voluptas eveniet qui animi sunt
-                  deserunt magni ratione quae ipsa provident inventore vel neque
-                  sed numquam quisquam eum repudiandae velit aperiam vitae earum
-                  voluptates. Temporibus, sapiente? Labore alias quidem sint
-                  veritatis beatae itaque deleniti provident. Possimus maiores
-                  voluptates et, laudantium minima quae molestias consectetur,
-                  deleniti ab numquam dicta eum molestiae error perspiciatis
-                  distinctio nulla ullam nostrum. Incidunt soluta dolores
-                  quaerat. Debitis provident recusandae magni eius! Odit cum
-                  debitis repellendus quam, doloremque ab quos iusto, tempore
-                  voluptatum consequuntur labore. Dolorum, fuga. Possimus
-                  impedit molestiae tempora doloribus quaerat.
-                </p>
+              <div
+                class="bg-gray-800/50 rounded-2xl flex-1"
+                x-data="{
+                      timeline: [],
+                      loadTimeline() {
+                          fetch('data/timeline.json')
+                              .then(response => response.json())
+                              .then(data => this.timeline = data);
+                      }
+                   }"
+                x-init="loadTimeline()"
+              >
+                <template x-for="(item, index) in timeline" :key="index">
+                  <div class="relative pl-6 border-l-2 border-blue-500 mb-8">
+                    <div class="mb-1">
+                      <span
+                        class="font-semibold text-white"
+                        x-text="item.company"
+                      ></span>
+                      <span
+                        class="text-sm text-gray-400 ml-2"
+                        x-text="item.date"
+                      ></span>
+                    </div>
+                    <div class="text-blue-300 mb-1" x-text="item.role"></div>
+                    <p
+                      class="text-gray-400 text-sm"
+                      x-text="item.description"
+                    ></p>
+                  </div>
+                </template>
               </div>
             </div>
           </section>
