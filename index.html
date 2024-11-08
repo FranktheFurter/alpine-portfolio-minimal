@@ -246,18 +246,8 @@
         });
       };
 
-      // Debounce function to limit resize handler calls
-      const debounce = (func, wait) => {
-        let timeout;
-        return () => {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => func(), wait);
-        };
-      };
-
       document.addEventListener("DOMContentLoaded", () => {
         initVanta();
-        window.addEventListener("resize", debounce(initVanta, 250));
       });
 
       // Cleanup on page unload
